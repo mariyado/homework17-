@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.alfabank'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+    testImplementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    testImplementation 'org.apache.httpcomponents:httpmime:4.5.14'
+}
+
+test {
+    useJUnitPlatform()
+}
