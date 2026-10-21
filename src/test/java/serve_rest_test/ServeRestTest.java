@@ -1,10 +1,11 @@
 package serve_rest_test;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
+
+import serve_rest_test.dto.UserRequest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -59,7 +60,11 @@ public class ServeRestTest {
     @Order(3)
     void shouldCreateNewUser() {
 
-        String newUser = "{\"nome\":\"Ann Grane\",\"email\":\"kj232d43ie8hgyge@qa.com\",\"password\":\"secret123\",\"administrador\":\"true\"}";
+        UserRequest newUser = new UserRequest(
+                "Ann Grane",
+                "kj232d43ie8hgyge@qa.com",
+                "secret123",
+                "true");
 
         Response response = given()
                 .contentType(ContentType.JSON)
