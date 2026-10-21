@@ -151,4 +151,26 @@ public class ServeRestTest {
             .body("produtos.nome", everyItem(not(empty())))
             .body("produtos.nome", hasItem("Awesome Plastic Gloves"));
     }
+
+    @Test
+    @Order(8)
+    void shouldFindProductsByName() {
+        String nameOfFirstProduct = given()
+        .when()
+                .get("/produtos")
+        .then()
+                .statusCode(200)
+                .extract()
+                .path("produtos[0].nome");
+
+        given()
+            .param("nome", nameOfFirstProduct)
+        .when()
+            .get("/produtos")
+        .then()
+            .statusCode(200)
+            .body("quantidade", greaterThan(0))
+            .body("produtos.nome", hasItem(nameOfFirstProduct))
+            .body("produtos.nome", everyItem(containsString(nameOfFirstProduct)));
+    }
 }
